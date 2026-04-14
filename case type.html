@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Annie's McKinsey ATL · Case Prep</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #f5f0e8;
+    --cream: #ede8dc;
+    --mck-blue: #051C2C;
+    --mck-teal: #00829B;
+    --accent: #C8975A;
+    --accent-light: #e8c99a;
+    --muted: #6b6560;
+    --border: rgba(10,10,10,0.12);
+    --mono: 'DM Mono', monospace;
+    --serif: 'Playfair Display', serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--mck-blue);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.5rem;
+    height: 56px;
+    border-bottom: 2px solid var(--accent);
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .nav-links {
+    display: flex; gap: 0.25rem; list-style: none;
+  }
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    padding: 0.3rem 0.6rem;
+    border-radius: 2px;
+    transition: color 0.2s, background 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); background: rgba(200,151,90,0.1); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--mck-blue);
+    display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+    padding: 7rem 2.5rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 80% 50%, rgba(0,130,155,0.15) 0%, transparent 60%);
+  }
+  .hero-tag {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 0.7s 0.2s forwards;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    line-height: 1.05;
+    color: #fff;
+    max-width: 780px;
+    opacity: 0; animation: fadeUp 0.7s 0.4s forwards;
+  }
+  .hero h1 em { color: var(--accent); font-style: italic; }
+  .hero-sub {
+    font-family: var(--sans);
+    font-size: 1rem;
+    color: rgba(255,255,255,0.5);
+    font-weight: 300;
+    margin-top: 1.5rem;
+    letter-spacing: 0.02em;
+    opacity: 0; animation: fadeUp 0.7s 0.6s forwards;
+  }
+  .hero-nav-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+    margin-top: 3.5rem;
+    width: 100%;
+    max-width: 900px;
+    opacity: 0; animation: fadeUp 0.7s 0.8s forwards;
+  }
+  .hero-nav-item {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    padding: 0.9rem 1rem;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+    text-decoration: none;
+  }
+  .hero-nav-item:hover { background: rgba(200,151,90,0.12); border-color: var(--accent); }
+  .hero-nav-num {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.3rem;
+  }
+  .hero-nav-label {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.3;
+  }
+  .scroll-hint {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    font-family: var(--mono); font-size: 0.6rem; color: rgba(255,255,255,0.3);
+    letter-spacing: 0.15em; text-transform: uppercase;
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  }
+  .scroll-line {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollPulse 1.8s ease-in-out infinite;
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 5rem 2.5rem;
+    border-bottom: 1px solid var(--border);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-tag {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--mck-teal);
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+  }
+  .section-title em { color: var(--accent); font-style: italic; }
+  .section-intro {
+    font-size: 0.95rem;
+    color: var(--muted);
+    max-width: 620px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  /* ── STEP CARDS (Section 1) ── */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .step-card {
+    background: var(--paper);
+    padding: 1.8rem;
+    transition: background 0.2s;
+    cursor: pointer;
+  }
+  .step-card:hover { background: var(--cream); }
+  .step-num {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+  .step-title {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+  }
+  .step-body {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+  .step-tip {
+    margin-top: 0.9rem;
+    padding: 0.6rem 0.8rem;
+    background: rgba(200,151,90,0.1);
+    border-left: 2px solid var(--accent);
+    font-size: 0.78rem;
+    color: var(--ink);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* ── CASE TYPE CARDS ── */
+  .case-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.2rem;
+  }
+  .case-card {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .case-card:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+  .case-card-header {
+    background: var(--mck-blue);
+    padding: 1.2rem 1.4rem;
+    display: flex; justify-content: space-between; align-items: flex-start;
+  }
+  .case-card-title {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: #fff;
+  }
+  .case-card-icon {
+    font-size: 1.3rem;
+  }
+  .case-card-body {
+    background: var(--paper);
+    padding: 1.2rem 1.4rem;
+  }
+  .case-card-body p {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 0.9rem;
+  }
+  .framework-list {
+    list-style: none;
+  }
+  .framework-list li {
+    font-size: 0.78rem;
+    padding: 0.3rem 0;
+    border-bottom: 1px dashed var(--border);
+    color: var(--ink);
+    display: flex; align-items: flex-start; gap: 0.5rem;
+  }
+  .framework-list li::before {
+    content: '→';
+    color: var(--mck-teal);
+    flex-shrink: 0;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    margin-top: 0.05rem;
+  }
+  .framework-list li:last-child { border-bottom: none; }
+
+  /* ── INDUSTRY GUIDE ── */
+  .industry-tabs {
+    display: flex; gap: 0.5rem; flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+  .ind-tab {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.45rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    background: transparent;
+    cursor: pointer;
+    color: var(--muted);
+    transition: all 0.2s;
+  }
+  .ind-tab.active, .ind-tab:hover {
+    background: var(--mck-blue);
+    color: var(--accent);
+    border-color: var(--mck-blue);
+  }
+  .ind-panel { display: none; }
+  .ind-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .ind-col h4 {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    margin-bottom: 0.7rem;
+    color: var(--mck-teal);
+  }
+  .ind-col ul { list-style: none; }
+  .ind-col ul li {
+    font-size: 0.8rem;
+    color: var(--muted);
+    padding: 0.3rem 0;
+    border-bottom: 1px dashed var(--border);
+    line-height: 1.5;
+  }
+  .ind-col ul li:last-child { border-bottom: none; }
+  .ind-col ul li strong { color: var(--ink); }
+
+  /* ── AI SECTION ── */
+  .ai-hero-band {
+    background: var(--mck-blue);
+    border-radius: 8px;
+    padding: 2rem 2.2rem;
+    margin-bottom: 2rem;
+    display: flex; gap: 2rem; align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .ai-hero-band .big-stat {
+    flex: 0 0 auto;
+    text-align: center;
+  }
+  .big-stat .num {
+    font-family: var(--serif);
+    font-size: 2.8rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .big-stat .label {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+  }
+  .ai-hero-text {
+    flex: 1;
+    min-width: 220px;
+  }
+  .ai-hero-text p {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.7;
+  }
+  .ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .ai-card {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.4rem;
+    background: var(--paper);
+  }
+  .ai-card h4 {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    margin-bottom: 0.6rem;
+  }
+  .ai-card p, .ai-card li {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .ai-card ul { list-style: none; padding: 0; }
+  .ai-card ul li {
+    padding: 0.25rem 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .ai-card ul li:last-child { border-bottom: none; }
+  .ai-card ul li::before { content: '◆ '; color: var(--mck-teal); font-size: 0.55rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--mck-blue);
+    padding: 2rem 2.5rem;
+    text-align: center;
+  }
+  footer p {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.12em;
+  }
+  footer span { color: var(--accent); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; } 50% { opacity: 1; }
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    width: 40px; height: 2px;
+    background: var(--accent);
+    margin: 1rem 0 1.5rem;
+  }
+
+  /* responsive */
+  @media (max-width: 700px) {
+    .hero-nav-grid { grid-template-columns: 1fr 1fr; }
+    .ind-panel.active { grid-template-columns: 1fr; }
+    .ai-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Annie · McKinsey ATL Prep</div>
+  <ul class="nav-links">
+    <li><a href="#approach">Approach</a></li>
+    <li><a href="#casetypes">Case Types</a></li>
+    <li><a href="#industry">Industry</a></li>
+    <li><a href="#ai">AI@McKinsey</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-tag">McKinsey Atlanta Office · Case Interview Prep</p>
+  <h1>Think top-down.<br>Lead with <em>the answer.</em></h1>
+  <p class="hero-sub">Annie's personal guide · 8 sections · built for the ATL office</p>
+  <div class="hero-nav-grid">
+    <a class="hero-nav-item" href="#approach">
+      <div class="hero-nav-num">01 – 01</div>
+      <div class="hero-nav-label">Top-Down Approach</div>
+    </a>
+    <a class="hero-nav-item" href="#casetypes">
+      <div class="hero-nav-num">02 – 06</div>
+      <div class="hero-nav-label">Case Type Playbooks</div>
+    </a>
+    <a class="hero-nav-item" href="#industry">
+      <div class="hero-nav-num">07</div>
+      <div class="hero-nav-label">Industry Guides</div>
+    </a>
+    <a class="hero-nav-item" href="#ai">
+      <div class="hero-nav-num">08</div>
+      <div class="hero-nav-label">AI @ McKinsey</div>
+    </a>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    scroll
+  </div>
+</div>
+
+<!-- SECTION 1: TOP-DOWN APPROACH -->
+<section id="approach">
+  <p class="section-tag">Section 01</p>
+  <h2 class="section-title">The Top-Down <em>Approach</em></h2>
+  <div class="divider"></div>
+  <p class="section-intro">McKinsey cases reward structured, hypothesis-first thinking. Lead with your conclusion, support with evidence, and never lose the thread. Here's the 8-step flow.</p>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">STEP 01</div>
+      <div class="step-title">Restate & Clarify the Objective</div>
+      <div class="step-body">Paraphrase the prompt back to the interviewer. Confirm you understood the goal, scope, and definition of success. Ask 1–2 targeted clarifying questions.</div>
+      <div class="step-tip">💡 "Just to make sure I understand — the client wants to... is that correct? And are we focused on the next 12 months?"</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">STEP 02</div>
+      <div class="step-title">Structure Your Approach</div>
+      <div class="step-body">Before diving in, lay out your framework. Tell the interviewer how you'll break down the problem. MECE thinking — mutually exclusive, collectively exhaustive.</div>
+      <div class="step-tip">💡 "I'd like to look at this across three areas: revenue, cost, and market dynamics. Let me start with revenue."</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">STEP 03</div>
+      <div class="step-title">Gather Company & Market Context</div>
+      <div class="step-body">Ask about the company's size, position, business model, and competitive landscape. Connect the company's mission to the case objective.</div>
+      <div class="step-tip">💡 "Can you tell me more about where this company sits in the market? Who are the main competitors?"</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">STEP 04</div>
+      <div class="step-title">Form a Hypothesis Early</div>
+      <div class="step-body">Don't wait until the end. State an early directional hypothesis upfront — this shows McKinsey-style top-down thinking. Refine as you get data.</div>
+      <div class="step-tip">💡 "My early hypothesis is that the profitability issue is on the cost side, likely in COGS — I'd like to test that."</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">STEP 05</div>
+      <div class="step-title">Drive the Analysis</div>
+      <div class="step-body">Request data, run the math, probe each branch. Support or disprove your hypothesis with evidence. Show comfort with numbers — McKinsey tests quantitative fluency.</div>
+      <div class="step-tip">💡 Do the math out loud. Walk through your calculation step by step. State your assumptions explicitly.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">STEP 06</div>
+      <div class="step-title">Synthesize — the "So What"</div>
+      <div class="step-body">Pull the threads together. What does the data actually tell you? This is your synthesis moment — move from observation to insight.</div>
+      <div class="step-tip">💡 "So what this tells us is... which means the real issue isn't X, it's Y."</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">STEP 07</div>
+      <div class="step-title">Recommendation — Lead with the Answer</div>
+      <div class="step-body">Confident, clear, top-down. State your conclusion first, then support it. Think of it like a McKinsey slide: the headline is the insight, not the data.</div>
+      <div class="step-tip">💡 "I recommend the client pursue X. There are three reasons: first... second... third..."</div>
+    </div>
+    <div class="step-card">
+      <div class="step-num">STEP 08</div>
+      <div class="step-title">Risks, Caveats & Next Steps</div>
+      <div class="step-body">Acknowledge what you'd want to validate, key risks, and immediate actions. Shows intellectual honesty and real-world thinking — not just "the answer."</div>
+      <div class="step-tip">💡 "The main risk here is X. I'd want to validate Y before committing. Immediate next step would be..."</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2–6: CASE TYPES -->
+<section id="casetypes">
+  <p class="section-tag">Sections 02 – 06</p>
+  <h2 class="section-title">Case Type <em>Playbooks</em></h2>
+  <div class="divider"></div>
+  <p class="section-intro">Five core case archetypes. Each has a distinct opening hypothesis, key data asks, and common traps. Know the pattern, then flex.</p>
+  <div class="case-grid">
+
+    <!-- Growth Strategy -->
+    <div class="case-card">
+      <div class="case-card-header">
+        <div class="case-card-title">Growth Strategy</div>
+        <div class="case-card-icon">📈</div>
+      </div>
+      <div class="case-card-body">
+        <p>Client wants to grow revenue. Where, how fast, and through what lever — organic vs. inorganic, product vs. geography?</p>
+        <ul class="framework-list">
+          <li>Current state: revenue breakdown by product / segment / geo</li>
+          <li>Market sizing: TAM, SAM, growth rate</li>
+          <li>Competitive dynamics: market share, differentiation</li>
+          <li>Levers: price, volume, new products, new markets</li>
+          <li>Go-to-market: distribution, channels, CAC vs. LTV</li>
+          <li>Prioritize: which lever has highest ROI + feasibility?</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- New Market Entry -->
+    <div class="case-card">
+      <div class="case-card-header">
+        <div class="case-card-title">New Market Entry</div>
+        <div class="case-card-icon">🌐</div>
+      </div>
+      <div class="case-card-body">
+        <p>Should we enter? If yes, how? Evaluate market attractiveness vs. company fit vs. competitive barriers.</p>
+        <ul class="framework-list">
+          <li>Market attractiveness: size, growth, profitability</li>
+          <li>Competitive landscape: incumbents, barriers to entry</li>
+          <li>Company fit: capabilities, synergies, brand fit</li>
+          <li>Entry mode: organic, acquire, partner/JV</li>
+          <li>Risks & timeline to profitability</li>
+          <li>Go / no-go recommendation with clear rationale</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Profitability -->
+    <div class="case-card">
+      <div class="case-card-header">
+        <div class="case-card-title">Profitability</div>
+        <div class="case-card-icon">💰</div>
+      </div>
+      <div class="case-card-body">
+        <p>Profits are declining. Isolate whether it's a revenue problem, a cost problem, or both — then drill down.</p>
+        <ul class="framework-list">
+          <li>Revenue: price × volume — which moved? Why?</li>
+          <li>Cost: fixed vs. variable — what changed?</li>
+          <li>COGS vs. SG&A vs. other line items</li>
+          <li>Segment: which product / geography is the drag?</li>
+          <li>Benchmarking: vs. competitors, vs. prior periods</li>
+          <li>Root cause → recommendation to restore margins</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- M&A -->
+    <div class="case-card">
+      <div class="case-card-header">
+        <div class="case-card-title">Mergers & Acquisitions</div>
+        <div class="case-card-icon">🤝</div>
+      </div>
+      <div class="case-card-body">
+        <p>Should we acquire? What's the strategic rationale, and does the value creation justify the price?</p>
+        <ul class="framework-list">
+          <li>Strategic fit: why this target, why now?</li>
+          <li>Target analysis: financials, market position, capabilities</li>
+          <li>Synergies: revenue synergies + cost synergies</li>
+          <li>Valuation: is the price reasonable given synergies?</li>
+          <li>Integration risk: culture, ops, retention</li>
+          <li>Alternative: build vs. buy vs. partner?</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Cost Reduction -->
+    <div class="case-card">
+      <div class="case-card-header">
+        <div class="case-card-title">Cost Reduction</div>
+        <div class="case-card-icon">✂️</div>
+      </div>
+      <div class="case-card-body">
+        <p>Client needs to reduce costs without hurting core business. Find where, how much, and what the tradeoffs are.</p>
+        <ul class="framework-list">
+          <li>Cost structure: map all cost categories</li>
+          <li>Benchmark: vs. industry / competitors</li>
+          <li>Quick wins vs. structural changes</li>
+          <li>Procurement, headcount, footprint, outsourcing</li>
+          <li>Impact on revenue / quality / morale</li>
+          <li>Prioritized roadmap with savings estimates</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECTION 7: INDUSTRY GUIDES -->
+<section id="industry">
+  <p class="section-tag">Section 07</p>
+  <h2 class="section-title">Industry-Specific <em>Guides</em></h2>
+  <div class="divider"></div>
+  <p class="section-intro">Each industry has its own vocabulary, KPIs, and business model logic. Know the lens before you walk in.</p>
+  <div class="industry-tabs">
+    <button class="ind-tab active" onclick="showIndustry('healthcare')">Healthcare</button>
+    <button class="ind-tab" onclick="showIndustry('retail')">Retail</button>
+    <button class="ind-tab" onclick="showIndustry('consumer')">Consumer</button>
+    <button class="ind-tab" onclick="showIndustry('supplychain')">Supply Chain</button>
+  </div>
+
+  <div class="ind-panel active" id="panel-healthcare">
+    <div class="ind-col">
+      <h4>Key Concepts & KPIs</h4>
+      <ul>
+        <li><strong>Payers vs. providers vs. pharma</strong> — know who your client is</li>
+        <li><strong>PMPM</strong> — per member per month cost</li>
+        <li><strong>Utilization rate</strong> — volume of services consumed</li>
+        <li><strong>Reimbursement rates</strong> — Medicare/Medicaid vs. commercial</li>
+        <li><strong>HEDIS scores</strong> — quality measurement for managed care</li>
+        <li><strong>Patient outcomes, readmission rates, LOS</strong></li>
+        <li><strong>Value-based care vs. fee-for-service</strong></li>
+      </ul>
+    </div>
+    <div class="ind-col">
+      <h4>Common Case Angles</h4>
+      <ul>
+        <li>Hospital system profitability under value-based contracts</li>
+        <li>Pharma company entering biosimilar market</li>
+        <li>Health insurer reducing medical loss ratio</li>
+        <li>Digital health startup scaling patient acquisition</li>
+        <li>AI/ML integration in clinical workflows (very relevant now)</li>
+        <li>Cost of care management for high-risk populations</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="ind-panel" id="panel-retail">
+    <div class="ind-col">
+      <h4>Key Concepts & KPIs</h4>
+      <ul>
+        <li><strong>Same-store sales growth (SSS)</strong> — organic performance</li>
+        <li><strong>Gross margin %</strong> — varies widely by category</li>
+        <li><strong>Inventory turns</strong> — efficiency of stock management</li>
+        <li><strong>Shrink</strong> — loss from theft, damage, error</li>
+        <li><strong>Basket size & traffic</strong> — volume drivers</li>
+        <li><strong>Omnichannel mix</strong> — online vs. in-store economics</li>
+      </ul>
+    </div>
+    <div class="ind-col">
+      <h4>Common Case Angles</h4>
+      <ul>
+        <li>Big-box retailer (e.g. Home Depot) reducing supply chain costs</li>
+        <li>DTC brand expanding into physical retail</li>
+        <li>Grocery chain responding to margin compression</li>
+        <li>Retailer digital transformation / e-commerce acceleration</li>
+        <li>Private label strategy to improve margins</li>
+        <li>Store network optimization / closure analysis</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="ind-panel" id="panel-consumer">
+    <div class="ind-col">
+      <h4>Key Concepts & KPIs</h4>
+      <ul>
+        <li><strong>Brand equity & NPS</strong></li>
+        <li><strong>Market share by channel</strong></li>
+        <li><strong>Price elasticity</strong> — sensitivity of demand to price</li>
+        <li><strong>Trade promotion ROI</strong></li>
+        <li><strong>CAC vs. LTV</strong> — especially for D2C</li>
+        <li><strong>SKU rationalization</strong> — simplifying portfolio</li>
+      </ul>
+    </div>
+    <div class="ind-col">
+      <h4>Common Case Angles</h4>
+      <ul>
+        <li>CPG brand losing market share to private label</li>
+        <li>Premium brand entering mass market</li>
+        <li>Consumer company pricing strategy in inflationary environment</li>
+        <li>Portfolio rationalization — which SKUs to cut?</li>
+        <li>International expansion of US consumer brand</li>
+        <li>Direct-to-consumer channel build vs. buy</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="ind-panel" id="panel-supplychain">
+    <div class="ind-col">
+      <h4>Key Concepts & KPIs</h4>
+      <ul>
+        <li><strong>COGS breakdown</strong> — raw materials, labor, overhead</li>
+        <li><strong>Inventory days / DSI</strong></li>
+        <li><strong>On-time in-full (OTIF)</strong> — delivery performance</li>
+        <li><strong>Tier 1 / Tier 2 / Tier 3 suppliers</strong></li>
+        <li><strong>Make vs. buy vs. outsource</strong></li>
+        <li><strong>Design for supply chain (DFSC)</strong> — cost set at design</li>
+        <li><strong>Lead time, safety stock, EOQ</strong></li>
+      </ul>
+    </div>
+    <div class="ind-col">
+      <h4>Common Case Angles</h4>
+      <ul>
+        <li>Manufacturer reducing COGS through design optimization</li>
+        <li>Retailer building supply chain resilience post-disruption</li>
+        <li>Company nearshoring vs. offshoring decision</li>
+        <li>Flooring / home goods supplier managing volatility</li>
+        <li>Procurement consolidation for cost savings</li>
+        <li>Digital supply chain transformation / real-time visibility</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8: AI @ McKINSEY -->
+<section id="ai">
+  <p class="section-tag">Section 08</p>
+  <h2 class="section-title">AI @ <em>McKinsey</em></h2>
+  <div class="divider"></div>
+  <p class="section-intro">AI is now a live topic in McKinsey cases and interviews. Know what the firm is building, where it's deploying, and how to bring AI fluency into your answers.</p>
+
+  <div class="ai-hero-band">
+    <div class="big-stat">
+      <div class="num">QuantumBlack</div>
+      <div class="label">McKinsey's AI arm</div>
+    </div>
+    <div class="ai-hero-text">
+      <p>McKinsey's AI practice is led by <strong style="color:var(--accent)">QuantumBlack</strong>, its data science and AI subsidiary. The firm has invested heavily in proprietary AI tools, GenAI client offerings, and internal productivity platforms. AI literacy is now expected at the BA/analyst level — especially for Tech & AI track candidates.</p>
+    </div>
+  </div>
+
+  <div class="ai-grid">
+    <div class="ai-card">
+      <h4>What McKinsey Is Building</h4>
+      <ul>
+        <li>Lilli — McKinsey's internal GenAI knowledge platform for consultants</li>
+        <li>QuantumBlack AI — analytics, ML, decision intelligence for clients</li>
+        <li>GenAI client transformation practices across industries</li>
+        <li>AI-powered strategy tools embedded in consulting workflows</li>
+        <li>Responsible AI frameworks and governance advisory</li>
+      </ul>
+    </div>
+    <div class="ai-card">
+      <h4>AI Case Topics Being Tested</h4>
+      <ul>
+        <li>Should a company build, buy, or partner for AI capabilities?</li>
+        <li>ROI of GenAI deployment — where does value actually accrue?</li>
+        <li>AI-driven cost reduction (automation, workforce reallocation)</li>
+        <li>Data strategy as a prerequisite to AI value creation</li>
+        <li>AI in healthcare — clinical AI, coding automation, diagnostics</li>
+        <li>Responsible AI / risk management for regulated industries</li>
+      </ul>
+    </div>
+    <div class="ai-card">
+      <h4>How to Talk About AI in Cases</h4>
+      <ul>
+        <li>Don't just say "use AI" — specify the use case and value chain step</li>
+        <li>Quantify: "AI could reduce X hours of manual work by Y%"</li>
+        <li>Always address data readiness: "This assumes clean, labeled data exists"</li>
+        <li>Acknowledge change management: "Adoption risk is real — need training"</li>
+        <li>Connect to your own experience where genuine (MedEase, ANNA-PR)</li>
+      </ul>
+    </div>
+    <div class="ai-card">
+      <h4>Annie's AI Edge 🎯</h4>
+      <ul>
+        <li>Built ANNA-PR — LLM-based clinical interview scoring pipeline</li>
+        <li>MedEase — multi-agent AI platform deployed in healthcare navigation</li>
+        <li>RAG architecture, automated QA/QC, human-in-the-loop design</li>
+        <li>Experience with responsible AI in HIPAA/IRB-compliant settings</li>
+        <li>Use these as PEI stories AND as proof points in AI case discussions</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Annie He · McKinsey ATL Office · Case Prep Guide · <span>Built to get the offer.</span></p>
+</footer>
+
+<script>
+  function showIndustry(id) {
+    document.querySelectorAll('.ind-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.ind-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('panel-' + id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>
