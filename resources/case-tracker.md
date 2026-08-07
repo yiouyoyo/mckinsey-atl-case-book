@@ -4,6 +4,6 @@ A running list of external case prep resources. Add new entries to the table bel
 
 | Name | Link | Notes |
 |------|------|-------|
-| McKinsey Case Book | https://www.mckcasebook.com | Comprehensive McKinsey-specific case prep |
+|  Case tracker| https://docs.google.com/spreadsheets/d/1JBr7Pm_yjOgJIQahZJ88zvcntk2nBO5Aiebs2JWnB-k/edit?gid=0#gid=0 | tracking progress |
 
 <!-- Add more rows here as you find useful resources -->
