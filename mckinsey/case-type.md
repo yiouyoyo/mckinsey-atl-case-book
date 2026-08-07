@@ -258,12 +258,4 @@ McKinsey's AI practice is led by **QuantumBlack**, its data science and AI subsi
 - Quantify: "AI could reduce X hours of manual work by Y%"
 - Always address data readiness: "This assumes clean, labeled data exists"
 - Acknowledge change management: "Adoption risk is real — need training"
-- Connect to your own experience where genuine (MedEase, ANNA-PR)
-
-### Annie's AI Edge
-
-- Built ANNA-PR — LLM-based clinical interview scoring pipeline
-- MedEase — multi-agent AI platform deployed in healthcare navigation
-- RAG architecture, automated QA/QC, human-in-the-loop design
-- Experience with responsible AI in HIPAA/IRB-compliant settings
-- Use these as PEI stories AND as proof points in AI case discussions
+- Where relevant, draw on prior AI/ML project experience to ground your answer
