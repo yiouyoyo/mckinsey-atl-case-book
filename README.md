@@ -1,4 +1,4 @@
-# Case Interview Prep
+# Cracking Cases & Taking Names
 
 A personal case prep reference organized by firm.
 
